@@ -132,7 +132,7 @@ namespace Quantum.Kata.BasicGates
     {
         body
         {
-            // ...
+            Z(qs[0]); 
         }
         adjoint auto;
     }
@@ -144,7 +144,7 @@ namespace Quantum.Kata.BasicGates
     {
         body
         {
-            // ...
+            X(qs[0]);
         }
         adjoint auto;
     }
@@ -156,7 +156,7 @@ namespace Quantum.Kata.BasicGates
     {
         body
         {
-            // ...
+           Y(qs[0]);
         }
         adjoint auto;
     }
@@ -178,7 +178,7 @@ namespace Quantum.Kata.BasicGates
     {
         body
         {
-            // ...
+            CNOT(qs[0],qs[1]); 
         }
         adjoint self;
     }
@@ -193,7 +193,7 @@ namespace Quantum.Kata.BasicGates
     {
         body
         {
-            // ...
+            (Controlled Z)( [qs[0]] , qs[1]);
         }
         adjoint self;
     }
@@ -206,6 +206,7 @@ namespace Quantum.Kata.BasicGates
     {
         body
         {
+            SWAP(qs[0] , qs[1]); 
             // Hint: this task can be solved using one primitive gate;
             // as an exercise, try to express the solution using several 
             // (possibly controlled) Pauli gates.
@@ -225,7 +226,7 @@ namespace Quantum.Kata.BasicGates
     {
         body
         {
-            // ...
+            CCNOT(qs[0],qs[1],qs[2]); 
         }
         adjoint self;
     }
@@ -239,7 +240,7 @@ namespace Quantum.Kata.BasicGates
     {
         body
         {
-            // ...
+            (Controlled SWAP)([qs[0]], (qs[1],qs[2])) ; 
         }
         adjoint self;
     }
