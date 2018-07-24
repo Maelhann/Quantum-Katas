@@ -44,11 +44,7 @@ namespace Quantum.Kata.BasicGates
     {
         body
         {
-            // The Pauli X gate will change the |0〉 state to the |1〉 state and vice versa.
-            // Type X(q);
-            // Then rebuild the project and rerun the tests - T11_StateFlip_Test should now pass!
-            
-            // ...
+          X(q);    
         }
         adjoint self;
     }
@@ -65,7 +61,8 @@ namespace Quantum.Kata.BasicGates
     {
         body
         {
-            // ...
+            // this is tantamount to using a Hadamard gate
+            H(q); 
         }
         adjoint self;
     }
@@ -77,7 +74,7 @@ namespace Quantum.Kata.BasicGates
     {
         body
         {
-            // ...
+            Z(q); 
         }
         adjoint self;
     }
@@ -94,7 +91,7 @@ namespace Quantum.Kata.BasicGates
     {
         body
         {
-            // ...
+           Ry(2.0 * alpha, q);  
         }
         adjoint auto;
     }
@@ -106,7 +103,7 @@ namespace Quantum.Kata.BasicGates
     {
         body
         {
-            // ...
+            S(q); 
         }
         adjoint auto;
     }
@@ -123,7 +120,7 @@ namespace Quantum.Kata.BasicGates
     {
         body
         {
-            // ...
+            Rz(alpha, q); 
         }
         adjoint auto;
     }
