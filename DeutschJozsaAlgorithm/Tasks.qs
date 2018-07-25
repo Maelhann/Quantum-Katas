@@ -161,23 +161,38 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
     // 
     // A prefix of length k of a state |x〉 = |x₁, ..., xₙ〉 is the state of its first k qubits |x₁, ..., xₖ〉.
     // For example, a prefix of length 2 of a state |0110〉 is 01.
+
+    operation Oracle_Hamming_Helper(x : Qubit[], prefix : Int[], lim : Int) : () 
+    {
+     body
+     {
+        for(num in 0..lim){
+          if(prefix[num] == 0 ){
+            X(x[num]); 
+          }
+        }
+     }
+    
+    }
+
     operation Oracle_HammingWithPrefix (x : Qubit[], y : Qubit, prefix : Int[]) : ()
     {
         body
         {
-            // The following line enforces the constraint on the input arrays.
-            // You don't need to modify it. Feel free to remove it, this won't cause your code to fail.
-            let P = Length(prefix);
-            AssertBoolEqual(1 <= P && P <= Length(x), true, "P should be between 1 and N, inclusive");
+            
+            
+            let P = Length(prefix) -1;
+            AssertBoolEqual(1 <= P+1 && P+1 <= Length(x), true, "P should be between 1 and N, inclusive");
 
-            // Hint: the first part of the function is the same as in task 1.4
+            
+            Oracle_OddNumberOfOnes(x,y);
+            Oracle_Hamming_Helper(x,prefix,P);  
+            (Controlled X)(x[0..P],y); 
+            Oracle_Hamming_Helper(x,prefix,P); 
 
-            // ...
+            
 
-            // Hint: you can use Controlled functor to perform multicontrolled gates
-            // (gates with multiple control qubits).
-
-            // ...
+            
         }
     }
 

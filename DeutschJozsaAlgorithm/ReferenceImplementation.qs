@@ -160,7 +160,7 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
             for (i in 0..Length(x)-1) {
                 CNOT(x[i], y);
             }
-
+  
             // add check for prefix as a multicontrolled NOT
             // true bits of r correspond to 1-controls, false bits - to 0-controls
             for (i in 0..P-1) {
