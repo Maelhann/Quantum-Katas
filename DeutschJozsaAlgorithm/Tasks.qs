@@ -44,9 +44,9 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
     {
         body
         {
-            // Since f(x) = 0 for all values of x, |y ⊕ f(x)〉 = |y〉.
-            // This means that the operation doesn't need to do any transformation to the inputs.
-            // Build the project and run the tests to see that T01_Oracle_Zero_Test test passes.
+            
+            // no need for transformation here ahah
+            
         }
     }
 
@@ -59,10 +59,7 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
     {
         body
         {
-            // Since f(x) = 1 for all values of x, |y ⊕ f(x)〉 = |y ⊕ 1〉 = |NOT y〉.
-            // This means that the operation needs to flip qubit y (i.e. transform |0〉 to |1〉 and vice versa).
-
-            // ...
+            X(y); 
         }
     }
 
@@ -75,12 +72,12 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
     operation Oracle_Kth_Qubit (x : Qubit[], y : Qubit, k : Int) : ()
     {
         body
-        {
+        { 
             // The following line enforces the constraints on the value of k that you are given.
             // You don't need to modify it. Feel free to remove it, this won't cause your code to fail.
             AssertBoolEqual(0 <= k && k < Length(x), true, "k should be between 0 and N-1, inclusive");
-
-            // ...
+            CNOT(x[k],y); 
+            
         }
     }
 
@@ -94,8 +91,11 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
         body
         {
             // Hint: f(x) can be represented as x_0 ⊕ x_1 ⊕ ... ⊕ x_(N-1)
-
-            // ...
+         
+            for(num in 0..Length(x)-1){
+            CNOT(x[num],y); 
+            }
+            
         }
     }
 
@@ -115,8 +115,12 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
             // The following line enforces the constraint on the input arrays.
             // You don't need to modify it. Feel free to remove it, this won't cause your code to fail.
             AssertIntEqual(Length(x), Length(r), "Arrays should have the same length");
-
-            // ...
+            for(num in 0..Length(x)-1){
+                 if(r[num] == 1){
+                    CNOT(x[num],y); 
+                }
+            } 
+            
         }
     }
 
@@ -134,8 +138,17 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
             // The following line enforces the constraint on the input arrays.
             // You don't need to modify it. Feel free to remove it, this won't cause your code to fail.
             AssertIntEqual(Length(x), Length(r), "Arrays should have the same length");
-
-            // ...
+            for(num in 0..Length(x)-1){
+            if(r[num]== 1){
+            // just do the addition
+            CNOT(x[num],y); 
+            }else{
+            X(x[num]); 
+            CNOT(x[num],y); 
+            X(x[num]); 
+            }
+            }
+            
         }
     }
 
