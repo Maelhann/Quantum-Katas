@@ -190,10 +190,7 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
             (Controlled X)(x[0..P],y); 
             Oracle_Hamming_Helper(x,prefix,P); 
 
-            
-
-            
-        }
+         }
     }
 
     // Task 1.8*. f(x) = 1 if x has two or three bits (out of three) set to 1, and 0 otherwise  (majority function)
@@ -208,10 +205,14 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
             // The following line enforces the constraint on the input array.
             // You don't need to modify it. Feel free to remove it, this won't cause your code to fail.
             AssertBoolEqual(3 == Length(x), true, "x should have exactly 3 qubits");
-            
-            // Hint: represent f(x) in terms of AND and ⊕ operations
+            for(num in 1..2){
+            CCNOT(x[0],x[num],y);
+            if(num == 2){
+            CCNOT(x[1],x[num],y); 
+            }
+        }
 
-            // ...
+            
         }
     }
 
@@ -232,7 +233,11 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
     {
         body
         {
-            // ...
+            for(num in 0..Length(query)-1){
+            H(query[num]); 
+            }
+            X(answer); 
+            H(answer);
         }
         adjoint auto;
     }
@@ -258,9 +263,20 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
             // Declare a Bool array in which the result will be stored;
             // the array has to be mutable to allow updating its elements.
             mutable r = new Int[N];
-
-            // ...
-
+            
+            using(qubits = Qubit[N+1]){
+            let ans = qubits[0];  
+            let arr = qubits[1..N];
+            BV_StatePrep(arr,ans); 
+            Uf(arr,ans); 
+              for(num in 1..N){
+               H(qubits[num]); 
+                 if(M(qubits[num]) != Zero){
+                 set r[num-1] = 1; 
+                 }
+               }
+            ResetAll(qubits);  
+            } 
             return r;
         }
     }
