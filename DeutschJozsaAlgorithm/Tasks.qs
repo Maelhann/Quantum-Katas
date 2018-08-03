@@ -330,12 +330,10 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
             // this variable has to be mutable to allow updating it.
             mutable isConstantFunction = true;
 
-            // Hint: even though Deutsch-Jozsa algorithm operates on a wider class of functions
-            // than Bernstein-Vazirani (i.e. functions which can not be represented as a scalar product, such as f(x) = 1), 
-            // it can be expressed as running Bernstein-Vazirani algorithm
-            // and then post-processing the return value classically
-
-            // ...
+            let r = BV_Algorithm(N,Uf); 
+            for(num in 0..N-1){
+            set isConstantFunction = isConstantFunction && (r[num] == 0); 
+            }
 
             return isConstantFunction;
         }
