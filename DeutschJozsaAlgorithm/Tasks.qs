@@ -263,7 +263,6 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
             // Declare a Bool array in which the result will be stored;
             // the array has to be mutable to allow updating its elements.
             mutable r = new Int[N];
-            
             using(qubits = Qubit[N+1]){
             let ans = qubits[0];  
             let arr = qubits[1..N];
@@ -290,20 +289,16 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
     {
         body
         {
-            // Hint: use Oracle_ProductFunction to implement the scalar product function oracle passed to BV_Algorithm.
-            // Since Oracle_ProductFunction takes three arguments (Qubit[], Qubit and Int[]), 
-            // and the operation passed to BV_Algorithm must take two arguments (Qubit[] and Qubit), 
-            // you need to use partial application to fix the third argument (a specific value of a bit vector). 
-            // 
-            // You might want to use something like the following:
-            // let oracle = Oracle_ProductFunction(_, _, [...your bit vector here...]);
-
-            // Hint: use AssertIntArrayEqual function to assert that the return value of BV_Algorithm operation 
-            // matches the expected value (i.e. the bit vector passed to Oracle_ProductFunction).
-
-            // BV_Test appears in the list of unit tests for the solution; run it to verify your code.
-
-            // ...
+            
+            // using arbitrary number N to defined length of the bit vector
+            let N = 15 ; 
+            
+            mutable r = new Int[N]; 
+            for(num in 0..N-1){
+            set r[num] = 1;  // our bit vector is composed of ones only
+            } 
+            let oracle = Oracle_ProductFunction(_,_,r); 
+            AssertIntArrayEqual(BV_Algorithm(N,oracle),r, "checking the bit vectors are identical") ; 
         }
     }
 
