@@ -292,7 +292,6 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
             
             // using arbitrary number N to defined length of the bit vector
             let N = 15 ; 
-            
             mutable r = new Int[N]; 
             for(num in 0..N-1){
             set r[num] = 1;  // our bit vector is composed of ones only
@@ -348,12 +347,19 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
         {
             // Hint: you will need to use partial application to test Oracle_Kth_Qubit and Oracle_ParityFunction;
             // see task 2.3 for a description of how to do that.
-
+                      
             // Hint: use AssertBoolEqual function to assert that the return value of DJ_Algorithm operation matches the expected value
 
             // DJ_Test appears in the list of unit tests for the solution; run it to verify your code.
-
-            // ...
+            //Oracle_Kth_Qubit (x : Qubit[], y : Qubit, k : Int) : ()
+            let N = 5 ;
+            
+            let oracle = Oracle_Kth_Qubit(_,_,0);
+            AssertBoolEqual( DJ_Algorithm(N,oracle), false , "checking the bool values match" );
+             
+            
+        
+        
         }
     }
 
@@ -380,7 +386,21 @@ namespace Quantum.Kata.DeutschJozsaAlgorithm
             // the array has to be mutable to allow updating its elements.
             mutable r = new Int[N];
 
-            // ...
+            using(qs = Qubit[N+1]){
+            let x = qs[0..N-1];
+            let y = qs[N]; 
+            Uf(x,y); 
+
+            if(N % 2 != 0){
+            // mod 2 operation
+            X(y); 
+            }
+
+            if(M(y) == One){
+              set r[0] = 1; 
+            }
+            ResetAll(qs);
+            }
 
             return r;
         }
