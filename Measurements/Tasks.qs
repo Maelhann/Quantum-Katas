@@ -38,8 +38,7 @@ namespace Quantum.Kata.Measurements
     {
         body
         {
-            // ...
-            return false;
+         return M(q) == One ; 
         }
     }
 
@@ -52,8 +51,8 @@ namespace Quantum.Kata.Measurements
     {
         body
         {
-            // ...
-            return false;
+            H(q);
+            return M(q) == Zero ; 
         }
     }
 
